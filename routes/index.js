@@ -1,8 +1,11 @@
 var express = require('express');
 var router = express.Router();
+var cors = require('cors')
 const { MongoClient } = require('mongodb');
 const {dbUrl} = require('../Database/config')
 
+app.use(express.json())
+app.use(cors())
 
 // Welcome Page
 router.get('/', async(req, res)=>{
