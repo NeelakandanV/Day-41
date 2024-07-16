@@ -1,2 +1,6 @@
-const dbUrl = "mongodb+srv://Neelakandan:Ha07ri09@cluster0.txsfvub.mongodb.net/"
+import dotenv from "dotenv";
+
+dotenv.config();
+
+const dbUrl = process.env.mongdbUrl;
 module.exports = {dbUrl}
