@@ -16,7 +16,7 @@ router.get('/', async(req, res)=>{
   }
 });
 
-
+console.log(process.env.PORT)
 // To create a Student with or without Mentor
 router.post("/CreateStudent",async(req,res)=>{
   const client = await MongoClient.connect(dbUrl)
