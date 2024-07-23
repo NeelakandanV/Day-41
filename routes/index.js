@@ -1,10 +1,10 @@
 var express = require('express');
-var cors = require('cors');
 var router = express.Router();
+var dotenv = require('dotenv');
 const { MongoClient } = require('mongodb');
-const {dbUrl} = require('../Database/config')
 
-app.use(cors());
+dotenv.config();
+const dbUrl = process.env.DBURL;
 
 // Welcome Page
 router.get('/', async(req, res)=>{

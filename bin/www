@@ -5,8 +5,12 @@
  */
 
 var app = require('../app');
+var dotenv = require('dotenv')
+var cors =require('cors');
 var debug = require('debug')('node-day-3:server');
 var http = require('http');
+
+dotenv.config();
 
 /**
  * Get port from environment and store in Express.
@@ -14,6 +18,7 @@ var http = require('http');
 
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
+app.use(cors());
 
 /**
  * Create HTTP server.
