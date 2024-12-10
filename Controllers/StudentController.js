@@ -37,7 +37,7 @@ export const createStudent = async(req,res)=>{
 // To get all Student Details
 export const getAllStudents = async(req,res)=>{
   try{
-    const find_Students = await students.find().pretty.toArray()
+    const find_Students = await students.find()
     if(find_Students.length>0)
       res.status(200).send({message:"Students data fetched",students:find_Students})
     else{
@@ -52,8 +52,8 @@ export const getAllStudents = async(req,res)=>{
 // To get available mentors and students without mentors
 export const assignMentees = async(req,res)=>{
   try{
-    const Stud_data = await students.find({"Mentor": ""}).project({_id:0}).toArray()
-    const Men_data = await mentors.find().project({_id:0,Name:1}).toArray()
+    const Stud_data = await students.find({"Mentor": ""})
+    const Men_data = await mentors.find({},{_id:0})
     if(Stud_data.length>0){
       const data = [{"Mentors Availabele":Men_data},{"Students without mentors":Stud_data}]
       res.status(200).send({message:"Data Fetched",data})
@@ -72,8 +72,8 @@ export const assignMentees = async(req,res)=>{
 export const assignToMentor = async(req,res)=>{
   try{
     const {id} = req.params;
-    const Stud_data = await students.find({"Mentor": ""}).project({_id:0}).toArray()
-    const Men_data = await mentors.find({"Name":id}).project({_id:0}).toArray()
+    const Stud_data = await students.find({"Mentor": ""},{_id:0})
+    const Men_data = await mentors.find({"Name":id},{_id:0})
     const Mentees = req.body.Mentees;
     if(Stud_data.length>0 && Men_data.length>0){
       if(Array.isArray(req.body.Mentees)){

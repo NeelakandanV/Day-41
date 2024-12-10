@@ -2,8 +2,8 @@
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import admins from "../Models/adminSchema.js"
-import { hashCompare, hashPassword, LoginToken, ResetToken } from "../Utils/Auth.js";
 import nodemailer from "nodemailer";
+import { hashCompare,hashPassword,LoginToken,ResetToken } from "../Utils/Auth.js";
 
 dotenv.config();
 
@@ -11,7 +11,7 @@ dotenv.config();
 // Creating User - Signup - Post
 export const CreateUser = async(req,res)=>{
     try{
-        const find_User = await admins.find({Email:req.body.Email})
+        const find_User = await admins.findOne({Email:req.body.Email})
         if(!find_User){
             let hashedPassword = await hashPassword(req.body.Password);
             req.body.Password = hashedPassword;
@@ -32,7 +32,7 @@ export const CreateUser = async(req,res)=>{
 // Checking User Credentials - Login - Post
 export const LoginUser = async(req,res)=>{
     try{
-        const find_User = await admins.find({Email:req.body.Email})
+        const find_User = await admins.findOne({Email:req.body.Email})
         if(find_User){
             if(req.body.Password){
                 const Password_Status = await hashCompare(req.body.Password,find_User.Password)

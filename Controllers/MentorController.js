@@ -27,7 +27,7 @@ export const createMentor = async(req,res)=>{
   // To get all Mentor Details
 export const allMentors = async(req,res)=>{
   try{
-    const find_Students = await mentors.find().pretty.toArray()
+    const find_Students = await mentors.find()
     if(find_Students.length>0)
       res.status(200).send({message:"Mentors data fetched",MentorData:find_Students})
     else{
@@ -43,7 +43,7 @@ export const allMentors = async(req,res)=>{
 export const getMentees = async(req,res)=>{
   try{
       const {id} = req.params;
-      const data = await students.find({"Mentor": id}).project({_id:0}).toArray()
+      const data = await students.find({"Mentor": id},{_id:0})
       if(data.length>0){
         res.status(200).send({message:"Data fetched",Mentees:data})
       }else{

@@ -20,7 +20,7 @@ router.get("/Logout",Logout)
 
 router.post("/CreateStudent",Validate,isVerifiedAdmin,createStudent)
 router.get("/students",Validate,getAllStudents)
-router.get("/AssignMentees",Validate,isVerifiedAdmin,assignMentees)
+router.get("/AssignMentees",Validate,assignMentees)
 router.put("/AssignMentees/:id",Validate,isVerifiedAdmin,assignToMentor)
 router.put("/ChangeMentor/:id",Validate,isVerifiedAdmin,changeMentor)
 router.get("/PreviousMentor/:id",Validate,showPrevMentor)
