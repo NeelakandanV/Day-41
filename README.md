@@ -5,6 +5,13 @@ URL - https://mentor-student-vulz.onrender.com
 # API Endpoints :-
 
 https://mentor-student-vulz.onrender.com/  - Welcome Page <br/>
+https://mentor-student-vulz.onrender.com/Login  - Login Page <br/>
+https://mentor-student-vulz.onrender.com/Register  - Signup <br/>
+https://mentor-student-vulz.onrender.com/ForgotPassword  - To get Reset Password link<br/>
+https://mentor-student-vulz.onrender.com/ResetPassword/:id/:pin/:token  - To reset password <br/>
+https://mentor-student-vulz.onrender.com/VerifyLink  - To get verification link <br/>
+https://mentor-student-vulz.onrender.com/Verification/:id/:pin/:token  - Get verified by the management <br/>
+https://mentor-student-vulz.onrender.com/Login  - Logout Page <br/>
 https://mentor-student-vulz.onrender.com/students  - To get all students details <br/>
 https://mentor-student-vulz.onrender.com/mentors  - To get all mentors details <br/>
 https://mentor-student-vulz.onrender.com/CreateStudent  - To Create a Student <br/>
