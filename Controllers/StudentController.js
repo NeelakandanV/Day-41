@@ -117,7 +117,7 @@ export const changeMentor = async(req,res)=>{
       const Stud_data = await students.findOne({"Roll_No":id},{_id:0})
       if(Stud_data.length==1){
         const Mentor = req.body.Mentor
-        const Men_data = await mentors.find({"Name":Mentor},{_id:0})
+        const Men_data = await mentors.findOne({"Name":Mentor},{_id:0})
         if(Men_data.length==1){
           const prev_Mentor = Stud_data.Mentor;
           const data = await students.updateOne({"Roll_No":id},{$set:{"Mentor":Mentor,"Old_Mentor":prev_Mentor}})
@@ -166,7 +166,7 @@ export const deleteStudent = async(req,res)=>{
   const client = await MongoClient.connect(dbUrl)
   try{
       const {id} = req.params;
-      const find_Stud = await students.find({Roll_No:id})
+      const find_Stud = await students.findOne({Roll_No:id})
       if(!find_Stud){
         res.status(400).send({message:"Student with the given Roll_No does not exists"})
       }
