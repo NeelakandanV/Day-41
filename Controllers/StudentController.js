@@ -113,7 +113,7 @@ export const assignToMentor = async(req,res)=>{
 export const changeMentor = async(req,res)=>{
   try{
       const {id} = req.params;
-      const Stud_data = await students.findOne({Roll_No:id},{_id:0})
+      const Stud_data = await students.findOne({Roll_No:id})
       if(!Stud_data){
         res.status(400).send({message:"The Student you are looking for is not available"})
       }
