@@ -51,7 +51,7 @@ export const getAllStudents = async(req,res)=>{
 // To get available mentors and students without mentors
 export const assignMentees = async(req,res)=>{
   try{
-    const Stud_data = await students.find({"Mentor": ""})
+    const Stud_data = await students.find({Mentor: ""})
     const Men_data = await mentors.find({},{_id:0})
     if(Stud_data.length>0){
       const data = [{"Mentors Availabele":Men_data},{"Students without mentors":Stud_data}]
@@ -71,8 +71,8 @@ export const assignMentees = async(req,res)=>{
 export const assignToMentor = async(req,res)=>{
   try{
     const {id} = req.params;
-    const Stud_data = await students.find({"Mentor": ""},{_id:0})
-    const Men_data = await mentors.find({"Name":id},{_id:0})
+    const Stud_data = await students.find({Mentor: ""},{_id:0})
+    const Men_data = await mentors.find({Name:id},{_id:0})
     const Mentees = req.body.Mentees;
     if(Stud_data.length>0 && Men_data.length>0){
       if(Array.isArray(req.body.Mentees)){
@@ -80,7 +80,7 @@ export const assignToMentor = async(req,res)=>{
         for(let stud of Mentees){
           const find_Mentee = Stud_data.find((data)=>data.Roll_No==stud)
           if(find_Mentee!=undefined){
-            const Data = await students.updateOne({"Roll_No":stud},{$set:{"Mentor":id}})
+            const Data = await students.updateOne({Roll_No:stud},{$set:{Mentor:id}})
             updated_data.push(Data)
           }
         }
@@ -113,19 +113,19 @@ export const assignToMentor = async(req,res)=>{
 export const changeMentor = async(req,res)=>{
   try{
       const {id} = req.params;
-      const Stud_data = await students.findOne({"Roll_No":id},{_id:0})
+      const Stud_data = await students.findOne({Roll_No:id},{_id:0})
       if(!Stud_data){
         res.status(400).send({message:"The Student you are looking for is not available"})
       }
       else{
         const Mentor = req.body.Mentor
-        const Men_data = await mentors.findOne({"Name":Mentor},{_id:0})
+        const Men_data = await mentors.findOne({Name:Mentor},{_id:0})
         if(!Men_data){
           res.status(400).send({message:"Mentor with the given name not available"})
         }
         else{
           const prev_Mentor = Stud_data.Mentor;
-          const data = await students.updateOne({"Roll_No":id},{$set:{"Mentor":Mentor,"Old_Mentor":prev_Mentor}})
+          const data = await students.updateOne({Roll_No:id},{$set:{Mentor:Mentor,Old_Mentor:prev_Mentor}})
           res.status(200).send({message:"Mentor changed successfully"})
         }
       }
