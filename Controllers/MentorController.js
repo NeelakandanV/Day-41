@@ -59,13 +59,13 @@ export const getMentees = async(req,res)=>{
 export const deleteMentor = async(req,res)=>{
   try{
       const {id} = req.params;
-      const find_Men = await mentors.find({Mentor_No:id})
-      if(find_Men){
-        const Mentor = await mentors.deleteOne({Mentor_No:id})
-        res.status(200).send({message:"Mentor Data deleted successfully"})
+      const find_Men = await mentors.findOne({Mentor_No:id})
+      if(!find_Men){
+        res.status(400).send({message:"Mentor with the given Mentor_No does not exists"})
       }
       else{
-        res.status(400).send({message:"Mentor with the given Mentor_No does not exists"})
+        const Mentor = await mentors.deleteOne({Mentor_No:id})
+        res.status(200).send({message:"Mentor Data deleted successfully"})
       }
   }
   catch(err){

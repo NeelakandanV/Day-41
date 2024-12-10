@@ -28,9 +28,9 @@ const mentorSchema = new mongoose.Schema({
         type : String,
         required : true
     },
-    Tech_Skills :{
+    Tech_Skills :[{
         type : String,
-    },
+    }],
     createdAt : {
         type : Date,
         default : Date.now
