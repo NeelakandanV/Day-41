@@ -93,7 +93,7 @@ export const ForgotPassword = async(req,res)=>{
                 Name : find_User.First_Name,
                 Email : find_User.Email
             })
-            const link = `https://mentor-student-vulz.onrender.com/ResetPassword/${find_User._id}/${ResetString}/${token}`
+            const link = `https://icyedutech.netlify.app/ResetPassword/${find_User._id}/${ResetString}/${token}`
             // for Sending mails - nodemailer
             var transporter = nodemailer.createTransport({
                 service: 'gmail',
@@ -183,7 +183,7 @@ export const VerifyUserLink = async(req,res)=>{
                     Name : find_User.First_Name,
                     Email : find_User.Email
                 })
-                const link = `https://mentor-student-vulz.onrender.com/Verification/${find_User._id}/${ResetString}/${token}`
+                const link = `https://icyedutech.netlify.app/Verification/${find_User._id}/${ResetString}/${token}`
     
                 // for Sending mails - nodemailer
                 var transporter = nodemailer.createTransport({
