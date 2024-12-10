@@ -1,4 +1,3 @@
-import express from "express";
 import students from "../Models/studentSchema.js";
 import mentors from "../Models/mentorSchema.js";
 
@@ -115,20 +114,20 @@ export const changeMentor = async(req,res)=>{
   try{
       const {id} = req.params;
       const Stud_data = await students.findOne({"Roll_No":id},{_id:0})
-      if(Stud_data.length==1){
+      if(!Stud_data){
+        res.status(400).send({message:"The Student you are looking for is not available"})
+      }
+      else{
         const Mentor = req.body.Mentor
         const Men_data = await mentors.findOne({"Name":Mentor},{_id:0})
-        if(Men_data.length==1){
+        if(!Men_data){
+          res.status(400).send({message:"Mentor with the given name not available"})
+        }
+        else{
           const prev_Mentor = Stud_data.Mentor;
           const data = await students.updateOne({"Roll_No":id},{$set:{"Mentor":Mentor,"Old_Mentor":prev_Mentor}})
           res.status(200).send({message:"Mentor changed successfully"})
         }
-        else{
-          res.status(400).send({message:"Mentor with the given name not available"})
-        }
-      }
-      else{
-        res.status(400).send({message:"The Student you are looking for is not available"})
       }
   }
   catch(err){
@@ -162,18 +161,17 @@ export const showPrevMentor = async(req,res)=>{
 
 
 //delete student
-export const deleteStudent = async(req,res)=>{
-  const client = await MongoClient.connect(dbUrl)
+export const deleteStudent = async(req,res)=>{ 
   try{
-      const {id} = req.params;
-      const find_Stud = await students.findOne({Roll_No:id})
-      if(!find_Stud){
-        res.status(400).send({message:"Student with the given Roll_No does not exists"})
-      }
-      else{
-        const Stud = await students.deleteOne({Roll_No:id})
-        res.status(200).send({message:"Student Data deleted successfully"})
-      }
+    const {id} = req.params;
+    const find_Stud = await students.findOne({Roll_No:id})
+    if(!find_Stud){
+      res.status(400).send({message:"Student with the given Roll_No does not exists"})
+    }
+    else{
+      const Stud = await students.deleteOne({Roll_No:id})
+      res.status(200).send({message:"Student Data deleted successfully"})
+    }
   }
   catch(err){
     res.status(500).send({message:"Internal Server Error",err})
