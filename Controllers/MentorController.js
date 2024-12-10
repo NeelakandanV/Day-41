@@ -6,7 +6,7 @@ export const createMentor = async(req,res)=>{
   const Id_Creator = Math.random()*10000
   const Id_No = Math.ceil(Id_Creator)+""
   try{
-    const find_User = await mentors.find({Email:req.body.Email})
+    const find_User = await mentors.findOne({Email:req.body.Email})
     if(!find_User){
       req.body.Mentor_No = Id_No;
       req.body.Tech_Skills = req.body.Tech_Skills || [""];

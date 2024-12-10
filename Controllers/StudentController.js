@@ -17,7 +17,7 @@ export const createStudent = async(req,res)=>{
   const Id_Creator = Math.random()*10000
   const Id_No = Math.ceil(Id_Creator)+""
   try{
-    const find_User = await students.find({Email:req.body.Email})
+    const find_User = await students.findOne({Email:req.body.Email})
     if(!find_User){
       req.body.Roll_No = Id_No;
       req.body.Mentor = req.body.Mentor || "";
