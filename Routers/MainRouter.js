@@ -19,7 +19,7 @@ router.get("/Verification/:id/:pin/:token",verifyUser)
 router.get("/Logout",Logout)
 
 router.post("/CreateStudent",Validate,isVerifiedAdmin,createStudent)
-router.get("/students",Validate,getAllStudents)
+router.get("/students",getAllStudents)
 router.get("/AssignMentees",Validate,assignMentees)
 router.put("/AssignMentees/:id",Validate,isVerifiedAdmin,assignToMentor)
 router.put("/ChangeMentor/:id",Validate,isVerifiedAdmin,changeMentor)
@@ -27,7 +27,7 @@ router.get("/PreviousMentor/:id",Validate,showPrevMentor)
 router.delete("/DeleteStudent/:id",Validate,isVerifiedAdmin,deleteStudent)
 
 router.post("/CreateMentor",Validate,isVerifiedAdmin,createMentor)
-router.get("/mentors",Validate,allMentors)
+router.get("/mentors",allMentors)
 router.get("/mentees/:id",Validate,getMentees)
 router.delete("/DeleteMentor/:id",Validate,isVerifiedAdmin,deleteMentor)
 
